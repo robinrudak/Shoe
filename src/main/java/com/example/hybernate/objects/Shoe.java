@@ -30,6 +30,36 @@ public class Shoe {
          shoeYear = year;
      }
 
+    public String getShoeName() {
+        return shoeName;
+    }
 
+    public void setShoeName(String shoeName) {
+        this.shoeName = shoeName;
+    }
+
+    public int getShoeSize() {
+        return shoeSize;
+    }
+
+    public void setShoeSize(int shoeSize) {
+        this.shoeSize = shoeSize;
+    }
+
+    public int getShoeYear() {
+        return shoeYear;
+    }
+
+    public void setShoeYear(int shoeYear) {
+        this.shoeYear = shoeYear;
+    }
+
+    public int getShoeID() {
+        return shoeID;
+    }
+
+    public void setShoeID(int shoeID) {
+        this.shoeID = shoeID;
+    }
 }
 
