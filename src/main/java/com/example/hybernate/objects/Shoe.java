@@ -15,19 +15,27 @@ import lombok.Setter;
 public class Shoe {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int shoeID;
+    private int shoeId;
 
      @Column(nullable = false, length = 45, unique = true, name = "shoe_name")
     private String shoeName;
      @Column
     private int shoeSize;
      @Column
-    private int shoeYear;
+    private String shoeBrand;
+     @Column
+     private String shoeGender;
+     @Column
+     private String shoeStyle;
+     @Column String shoePhoto;
 
-     public Shoe(String name, int size, int year) {
+     public Shoe(String name, int size, String brand, String gender, String style, String photo) {
          shoeName = name;
          shoeSize = size;
-         shoeYear = year;
+         shoeBrand = brand;
+         shoeGender = gender;
+         shoeStyle = style;
+         shoePhoto = photo;
      }
 
 

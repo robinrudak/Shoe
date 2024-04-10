@@ -27,8 +27,8 @@ public class ShoeController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
     @PostMapping("shoe")
-    public ResponseEntity<String> createShoe(String name, int size, int year){
-        Shoe shoe = new Shoe(name, size, year);
+    public ResponseEntity<String> createShoe(String name, int size, String brand, String gender, String style, String photo){
+        Shoe shoe = new Shoe(name, size, brand, gender, style, photo);
         boolean success = shoeService.createShoe(shoe);
         if (success) {
             return ResponseEntity.status(201).body("Successfully created!");
