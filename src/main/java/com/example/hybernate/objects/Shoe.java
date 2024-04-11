@@ -13,53 +13,22 @@ import lombok.Setter;
 @Entity
 @Table(name = "shoe")
 public class Shoe {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int shoeID;
 
-     @Column(nullable = false, length = 45, unique = true, name = "shoe_name")
+    @Column(nullable = false, length = 45, unique = true, name = "shoe_name")
     private String shoeName;
-     @Column
+    @Column
     private int shoeSize;
-     @Column
+    @Column
     private int shoeYear;
 
-     public Shoe(String name, int size, int year) {
-         shoeName = name;
-         shoeSize = size;
-         shoeYear = year;
-     }
-
-    public String getShoeName() {
-        return shoeName;
+    public Shoe(String name, int size, int year) {
+        shoeName = name;
+        shoeSize = size;
+        shoeYear = year;
     }
 
-    public void setShoeName(String shoeName) {
-        this.shoeName = shoeName;
-    }
-
-    public int getShoeSize() {
-        return shoeSize;
-    }
-
-    public void setShoeSize(int shoeSize) {
-        this.shoeSize = shoeSize;
-    }
-
-    public int getShoeYear() {
-        return shoeYear;
-    }
-
-    public void setShoeYear(int shoeYear) {
-        this.shoeYear = shoeYear;
-    }
-
-    public int getShoeID() {
-        return shoeID;
-    }
-
-    public void setShoeID(int shoeID) {
-        this.shoeID = shoeID;
-    }
 }
 

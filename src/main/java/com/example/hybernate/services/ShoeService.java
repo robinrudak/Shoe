@@ -45,7 +45,7 @@ public class ShoeService {
 
     // Changes Linus
     public Shoe getShoeByName(String shoeName) {
-        return repo.findByName(shoeName);
+        return repo.findByShoeName(shoeName);
     }
 
     public String checkShoeData(Shoe shoe, boolean post){
@@ -57,7 +57,7 @@ public class ShoeService {
         catch (Exception e) {
             // id is null
         }
-        if (post && repo.existsByName(shoe.getShoeName())) {
+        if (post && repo.existsByShoeName(shoe.getShoeName())) {
             return "Name already exists.";
         }
         try {
