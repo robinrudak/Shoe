@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -39,5 +41,7 @@ public class Shoe {
      }
 
 
+    public <E> Shoe(int id, String name, int size, String brand, String gender, String style, String photo, ArrayList<E> es) {
+    }
 }
 

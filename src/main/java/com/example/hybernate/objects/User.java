@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,7 +17,7 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int shoeId;
+    private int userId;
 
     @Column(nullable = false, length = 45, unique = true, name = "User_name")
     private String userName;
@@ -33,5 +35,7 @@ public class User {
     }
 
 
+    public <E> User(int id, String name, int balance, String password, ArrayList<E> es) {
+    }
 }
 
