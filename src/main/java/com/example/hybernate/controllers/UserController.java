@@ -35,7 +35,7 @@ public class UserController {
         }
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to save.");
     }
-    @PutMapping("student")
+    @PutMapping("user")
     public ResponseEntity<String> updateUser(int id, String name, int balance, String password) {
         User user = new User(id, name, balance, password, new ArrayList<>());
         boolean success = userService.updateUser(user);
@@ -44,7 +44,7 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to update.");
     }
-    @DeleteMapping("student")
+    @DeleteMapping("user")
     public ResponseEntity<String> deleteShoe(int id) {
         boolean success = userService.deleteUser(id);
         if (success) {

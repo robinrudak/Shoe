@@ -2,7 +2,6 @@ package com.example.hybernate.services;
 
 import com.example.hybernate.objects.User;
 import com.example.hybernate.repositories.UserRepository;
-import com.example.hybernate.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

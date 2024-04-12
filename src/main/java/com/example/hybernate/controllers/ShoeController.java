@@ -33,7 +33,7 @@ public class ShoeController {
         }
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to save.");
     }
-    @PutMapping("student")
+    @PutMapping("shoe")
     public ResponseEntity<String> updateStudent(int id, String name, int size, String brand, String gender, String style, String photo) {
         Shoe shoe = new Shoe(id, name, size, brand, gender, style, photo, new ArrayList<>());
         boolean success = shoeService.updateShoe(shoe);
@@ -42,7 +42,7 @@ public class ShoeController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to update.");
     }
-    @DeleteMapping("student")
+    @DeleteMapping("shoe")
     public ResponseEntity<String> deleteShoe(int id) {
         boolean success = shoeService.deleteShoe(id);
         if (success) {
