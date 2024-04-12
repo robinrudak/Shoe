@@ -1,54 +1,56 @@
 package com.example.hybernate.controllers;
 
 import com.example.hybernate.objects.Shoe;
+import com.example.hybernate.objects.User;
 import com.example.hybernate.services.ShoeService;
+import com.example.hybernate.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-@CrossOrigin(origins = "*")
-@RestController
-public class ShoeController {
-    private ShoeService shoeService;
 
-    @GetMapping("allshoes")
-    public ArrayList<Shoe> getAllShoes() {
-    return shoeService.getAll();
+@RestController
+@CrossOrigin(origins = "*")
+public class UserController {
+    private UserService userService;
+
+    @GetMapping("allusers")
+    public ArrayList<User> getAllUsers() {
+        return userService.getAll();
     }
-    @GetMapping("shoe")
-    public ResponseEntity<Shoe> getShoeById(int id){
-        Shoe shoe = shoeService.getShoe(id);
-        if (shoe != null) {
-            return ResponseEntity.status(200).body(shoe);
+    @GetMapping("user")
+    public ResponseEntity<User> getUserById(int id){
+        User user = userService.getUser(id);
+        if (user != null) {
+            return ResponseEntity.status(200).body(user);
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
-    @PostMapping("shoe")
-    public ResponseEntity<String> createShoe(String name, int size, String brand, String gender, String style, String photo){
-        Shoe shoe = new Shoe(name, size, brand, gender, style, photo);
-        boolean success = shoeService.createShoe(shoe);
+    @PostMapping("user")
+    public ResponseEntity<String> createUser(String name, int balance, String password){
+        User user = new User(name, balance, password);
+        boolean success = userService.createShoe(user);
         if (success) {
             return ResponseEntity.status(201).body("Successfully created!");
         }
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to save.");
     }
-    @PutMapping("shoe")
-    public ResponseEntity<String> updateStudent(int id, String name, int size, String brand, String gender, String style, String photo) {
-        Shoe shoe = new Shoe(id, name, size, brand, gender, style, photo, new ArrayList<>());
-        boolean success = shoeService.updateShoe(shoe);
+    @PutMapping("user")
+    public ResponseEntity<String> updateUser(int id, String name, int balance, String password) {
+        User user = new User(id, name, balance, password, new ArrayList<>());
+        boolean success = userService.updateUser(user);
         if (success) {
             return ResponseEntity.status(200).body("Successfully updated!");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to update.");
     }
-    @DeleteMapping("shoe")
+    @DeleteMapping("user")
     public ResponseEntity<String> deleteShoe(int id) {
-        boolean success = shoeService.deleteShoe(id);
+        boolean success = userService.deleteUser(id);
         if (success) {
             return ResponseEntity.status(200).body("Successfully deleted!");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to delete.");
     }
-
 }

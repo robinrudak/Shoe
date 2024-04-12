@@ -10,4 +10,5 @@ public class HybernateApplication {
 		SpringApplication.run(HybernateApplication.class, args);
 	}
 
+
 }
