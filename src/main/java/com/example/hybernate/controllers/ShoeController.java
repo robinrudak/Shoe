@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ShoeController {
     private ShoeService shoeService;
 
-    @GetMapping("")
+    @GetMapping("allshoes")
     public ArrayList<Shoe> getAllShoes() {
     return shoeService.getAll();
     }

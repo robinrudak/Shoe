@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class UserController {
     private UserService userService;
 
-    @GetMapping("")
+    @GetMapping("allusers")
     public ArrayList<User> getAllUsers() {
         return userService.getAll();
     }
