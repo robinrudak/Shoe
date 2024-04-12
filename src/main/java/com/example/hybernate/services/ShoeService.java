@@ -20,8 +20,8 @@ public class ShoeService {
             return false;
         }
         Shoe newShoe = repo.save(shoe);
-        shoe.setShoeID(newShoe.getShoeID());
-        System.out.println("Got id " + shoe.getShoeID() + "!");
+        shoe.setShoeId(newShoe.getShoeId());
+        System.out.println("Got id " + shoe.getShoeId() + "!");
         return true;
     }
     public Shoe getShoe(int id) {
@@ -31,8 +31,15 @@ public class ShoeService {
         return null;
     }
 
+    public boolean deleteShoe(int id) {
+        if (repo.existsById(id)) {
+            repo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
     public boolean updateShoe(Shoe shoe){
-        if (repo.existsById(shoe.getShoeID())){
+        if (repo.existsById(shoe.getShoeId())){
             repo.save(shoe);
             return true;
         }
