@@ -15,21 +15,22 @@ import java.util.ArrayList;
 @Entity
 @Table(name = "shoe")
 public class Shoe {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int shoeId;
 
-     @Column(nullable = false, length = 45, unique = true, name = "shoe_name")
+    @Column(nullable = false, length = 45, unique = true, name = "shoe_name")
     private String shoeName;
-     @Column
+    @Column
     private int shoeSize;
-     @Column
+    @Column
     private String shoeBrand;
-     @Column
-     private String shoeGender;
-     @Column
-     private String shoeStyle;
-     @Column String shoePhoto;
+    @Column
+    private String shoeGender;
+    @Column
+    private String shoeStyle;
+    @Column
+    private String shoePhoto;
 
      public Shoe(String name, int size, String brand, String gender, String style, String photo) {
          shoeName = name;

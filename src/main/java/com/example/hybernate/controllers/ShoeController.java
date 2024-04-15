@@ -9,13 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/shoe")
 public class ShoeController {
     private ShoeService shoeService;
+    public ShoeController (ShoeService shoeService) {
+        this.shoeService = shoeService;
+    }
 
+    // TODO Hemsida behöver.
     @GetMapping("allshoes")
     public ArrayList<Shoe> getAllShoes() {
     return shoeService.getAll();
     }
+
+    // TODO Hemsida behöver.
     @GetMapping("shoe")
     public ResponseEntity<Shoe> getShoeById(int id){
         Shoe shoe = shoeService.getShoe(id);
@@ -25,8 +32,7 @@ public class ShoeController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
     @PostMapping("shoe")
-    public ResponseEntity<String> createShoe(String name, int size, String brand, String gender, String style, String photo){
-        Shoe shoe = new Shoe(name, size, brand, gender, style, photo);
+    public ResponseEntity<String> createShoe(@RequestBody Shoe shoe){
         boolean success = shoeService.createShoe(shoe);
         if (success) {
             return ResponseEntity.status(201).body("Successfully created!");
@@ -34,8 +40,7 @@ public class ShoeController {
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to save.");
     }
     @PutMapping("shoe")
-    public ResponseEntity<String> updateStudent(int id, String name, int size, String brand, String gender, String style, String photo) {
-        Shoe shoe = new Shoe(id, name, size, brand, gender, style, photo, new ArrayList<>());
+    public ResponseEntity<String> updateShoe(@PathVariable int id, @RequestBody Shoe shoe) {
         boolean success = shoeService.updateShoe(shoe);
         if (success) {
             return ResponseEntity.status(200).body("Successfully updated!");

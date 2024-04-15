@@ -1,0 +1,115 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
+}
+
+.filters {
+  margin-bottom: 20px;
+}
+
+.filters select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filters button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #464746;
+  color: white;
+  cursor: pointer;
+}
+
+.shoe-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shoe-item button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3f413f;
+  color: white;
+  cursor: pointer;
+  width: 100px;
+  flex: 1;
+}
+.shoe-item select {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #5e5f5e;
+  color: white;
+  cursor: pointer;
+  width: 100px;
+  flex: 1;
+}
+.cart-item {
+  margin-bottom: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.cart-item button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #6f1610;
+  color: white;
+  cursor: pointer;
+}
+
+#balance, #cart {
+  margin-top: 20px;
+  text-align: left;
+}
+
+#cart button {
+  margin-top: 10px;
+}
+
+    .login-status {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+    .login-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .login-status {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+  }
+  .login-button {
+      font-size: 16px;
+      padding: 10px 20px;
+  }

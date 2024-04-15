@@ -13,7 +13,7 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         repo = userRepository;
     }
-    public boolean createShoe(User user) {
+    public boolean createUser(User user) {
         if (user.getUserName().length() > 45){
             return false;
         }

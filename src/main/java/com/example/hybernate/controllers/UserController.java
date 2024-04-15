@@ -12,13 +12,20 @@ import java.util.ArrayList;
 
 @RestController
 @CrossOrigin(origins = "*")
+@RequestMapping("/user")
 public class UserController {
     private UserService userService;
+
+    // Lagt till konstruktor för annars är userService null.
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("allusers")
     public ArrayList<User> getAllUsers() {
         return userService.getAll();
     }
+
     @GetMapping("user")
     public ResponseEntity<User> getUserById(int id){
         User user = userService.getUser(id);
@@ -27,15 +34,18 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
+
     @PostMapping("user")
     public ResponseEntity<String> createUser(String name, int balance, String password){
         User user = new User(name, balance, password);
-        boolean success = userService.createShoe(user);
+        boolean success = userService.createUser(user);
+
         if (success) {
             return ResponseEntity.status(201).body("Successfully created!");
         }
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to save.");
     }
+
     @PutMapping("user")
     public ResponseEntity<String> updateUser(int id, String name, int balance, String password) {
         User user = new User(id, name, balance, password, new ArrayList<>());
@@ -46,7 +56,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure to update.");
     }
     @DeleteMapping("user")
-    public ResponseEntity<String> deleteShoe(int id) {
+    public ResponseEntity<String> deleteUser(int id) {
         boolean success = userService.deleteUser(id);
         if (success) {
             return ResponseEntity.status(200).body("Successfully deleted!");
