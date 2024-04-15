@@ -38,4 +38,3 @@ public class User {
     public <E> User(int id, String name, int balance, String password, ArrayList<E> es) {
     }
 }
-

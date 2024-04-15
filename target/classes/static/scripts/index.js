@@ -315,8 +315,6 @@ function checkout() {
   updateCart();
   document.getElementById('balance-amount').textContent = balance;
   alert('Checkout successful!');
-
-  window.location.href = 'payment.html';
 }
 
 function populateSizeDropdown() {
@@ -333,74 +331,3 @@ function populateSizeDropdown() {
 }
 populateSizeDropdown();
 displayShoes(shoes);
-
-
-function submitForm() {
-  const name = document.getElementById('name').value;
-  const username = document.getElementById('username').value;
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-
-
-  const formData = {
-    name: name,
-    username: username,
-    email: email,
-    password: password
-  };
-
-
-  const jsonData = JSON.stringify(formData);
-
-
-  const postRequest = new XMLHttpRequest();
-  postRequest.open("POST", "http://localhost:8080/user");
-  postRequest.setRequestHeader("Content-Type", "application/json");
-  postRequest.onload = function() {
-    if (postRequest.status == 201) {
-      console.log("User created successfully!");
-
-      window.location.href = 'index.html';
-    } else {
-      console.log("Error:", postRequest.status);
-
-      alert("Failed to create user. Please try again.");
-    }
-  };
-  postRequest.send(jsonData);
-}
-
-function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    const loginData = {
-        username: username,
-        password: password
-    };
-
-    const jsonData = JSON.stringify(loginData);
-
-    const postRequest = new XMLHttpRequest();
-    postRequest.open("POST", "http://localhost:8080/user");
-    postRequest.setRequestHeader("Content-Type", "application/json");
-    postRequest.onload = function() {
-        if (postRequest.status == 200) {
-            console.log("Login successful!");
-
-
-            isLoggedIn = true;
-
-            toggleLoginStatus();
-
-            document.getElementById('checkoutBtn').disabled = false;
-
-            window.location.href = 'index.html';
-        } else {
-            console.log("Error:", postRequest.status);
-
-            alert("Login failed. Please check your username and password.");
-        }
-    };
-    postRequest.send(jsonData);
-}

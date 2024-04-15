@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoe Shop</title>
-    <script src="../static/scripts/index.js"></script>
     <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
 
     <style>
@@ -17,15 +16,14 @@
 
 </head>
 <body>
-
-
 <div class="container">
-    <header><h1>Shoe Shop</h1></header>
-    <main>
+    <div class="header">
+        <h1>Shoe Shop</h1>
         <div class="header-buttons">
             <button id="loginBtn" onclick="login()">Log In</button>
             <button id="signupBtn" onclick="window.location.href='signup.html';">Sign Up</button>
         </div>
+    </div>
     <div class="filters">
         <label for="gender">Gender:</label>
         <select id="gender"><option value="all">All</option><option value="male">Male</option><option value="female">Female</option></select>
@@ -33,7 +31,7 @@
         <select id="brand"><option value="all">All</option><option value="Nike">Nike</option><option value="Adidas">Adidas</option><option value="Puma">Puma</option></select>
         <label for="style">Style:</label>
         <select id="style"><option value="all">All</option><option value="casual">Casual</option><option value="sports">Sports</option><option value="formal">Formal</option></select>
-        <label for="size-filter">Size:</label>
+        <label for="size">Size:</label>
         <select id="size-filter"><option value="all">All</option></select>
         <button onclick="filterShoes()">Apply Filters</button>
     </div>
@@ -42,22 +40,9 @@
     <div id="cart" style="display: none;">
         <h2>Shopping Cart</h2>
         <ul id="cart-items"></ul>
-        <button id="checkoutBtn" onclick="checkout()" disabled>Proceed to Checkout</button>
+        <button onclick="checkout()">Proceed to Checkout</button>
     </div>
-
-</main>
 </div>
-<aside class="aside">
-    <div class="quote">
-        "You can tell a lot about a person by the shoes they wear."
-
-    </div>
-</aside>
-<footer class="footer">
-    <a href="#">Instagram</a>
-    <span>|</span>
-    <span>&copy; 2024 Shoe Shop</span>
-</footer>
 <input type="text" id="nameinput" placeholder="Name">
 <input type="text" id="sizeinput" placeholder="Size">
 <input type="text" id="brandinput" placeholder="Brand">
@@ -66,7 +51,7 @@
 <input type="text" id="photoinput" placeholder="Photo URL">
 <button onclick="submitForm()">Submit</button>
 
-
+<script src="../static/scripts/index.js"></script>
 <script>
     let isLoggedIn = false;
     function toggleLoginStatus() {
