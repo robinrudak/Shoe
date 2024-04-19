@@ -33,13 +33,18 @@ function signUpUser() {
         alert('Failed to create user. Please check your internet connection and try again.');
     });
 }
-
 function login() {
     var loggedInUser = document.getElementById("loggedInUser");
     var loginBtn = document.getElementById("loginBtn");
+    var topButtons = document.getElementsByClassName("top-buttons");
+
     if (loginBtn.textContent === "Log Out") {
         // If the button text is "Log Out", perform logout action
-        logout()
+        logout();
+        for (var i = 0; i < topButtons.length; i++) {
+                topButtons[i].style.display = "none";
+        }
+
     } else {
         // Get the username entered by the user
         var name = prompt("Enter your username:");
@@ -64,6 +69,11 @@ function login() {
                 // Perform additional actions such as redirecting to a new page or setting user session
                 sessionStorage.setItem("userName", user.userName);
                 sessionStorage.setItem("userId", user.userId);
+
+                // Show all top buttons
+                for (var i = 0; i < topButtons.length; i++) {
+                    topButtons[i].style.display = "block";
+                }
             } else {
                 // User not found or password doesn't match, display error message
                 alert('Invalid username or password.');
@@ -75,9 +85,15 @@ function login() {
         });
     }
 }
+
 function logout() {
+    var topButtons = document.getElementsByClassName("top-buttons");
     loggedInUser.textContent = "";
     loginBtn.textContent = "Login";
+    // Hide all top buttons
+    for (var i = 0; i < topButtons.length; i++) {
+       topButtons[i].style.display = "hidden";
+    }
     // Clear session storage or perform any additional logout actions
     sessionStorage.clear();
 }
@@ -305,6 +321,11 @@ function deleteUser() {
                 sessionStorage.removeItem('userId');
                 sessionStorage.removeItem('userName');
                 logout();
+                // Hide all buttons with the class "top-buttons" after user deletion
+                var topButtons = document.querySelectorAll('.top-buttons button');
+                topButtons.forEach(button => {
+                    button.style.display = "none";
+                });
             } else {
                 console.error("Failed to delete user:", response.status);
             }
