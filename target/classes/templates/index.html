@@ -5,100 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoe Shop</title>
     <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-
     <style>
         input[type="text"] {
             width: 60px;
         }
     </style>
     <link rel="stylesheet" href="../static/styles/style.css">
-
-
 </head>
 <body>
 <div class="container">
-    <h1>Shoe Shop</h1>
-    <div class="filters">
-        <label for="gender">Gender:</label>
-        <select id="gender"><option value="all">All</option><option value="male">Male</option><option value="female">Female</option></select>
-        <label for="brand">Brand:</label>
-        <select id="brand"><option value="all">All</option><option value="Nike">Nike</option><option value="Adidas">Adidas</option><option value="Puma">Puma</option></select>
-        <label for="style">Style:</label>
-        <select id="style"><option value="all">All</option><option value="casual">Casual</option><option value="sports">Sports</option><option value="formal">Formal</option></select>
-        <label for="size">Size:</label>
-        <select id="size-filter"><option value="all">All</option></select>
-        <button onclick="filterShoes()">Apply Filters</button>
-    </div>
-    <div id="shoe-list" class="shoe-list"></div>
-    <div id="balance" style="display: none;">Balance: $<span id="balance-amount">100</span></div>
-    <div id="cart" style="display: none;">
-        <h2>Shopping Cart</h2>
-        <ul id="cart-items"></ul>
-        <button onclick="checkout()">Proceed to Checkout</button>
-    </div>
+    <header>
+
+        <h1>Shoe Shop</h1>
+
+        <div class="top-buttons">
+
+            <button id="updateBtn" onclick="changePassword()">Change password</button>
+
+            <button id="deleteBtn" onclick="deleteUser()">Delete</button>
+
+        </div>
+
+    </header>
+    <main>
+        <div class="header-buttons">
+            <span id="loggedInUser"></span>
+            <button id="loginBtn" onclick="login()">Log In</button>
+            <button id="signupBtn" onclick="window.location.href='signup.html';">Sign Up</button>
+        </div>
+        <div class="filters">
+            <label for="gender">Gender:</label>
+            <select id="gender">
+                <option value="all">All</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <label for="brand">Brand:</label>
+            <select id="brand">
+                <option value="all">All</option>
+                <option value="Nike">Nike</option>
+                <option value="Adidas">Adidas</option>
+                <option value="Puma">Puma</option>
+            </select>
+            <label for="style">Style:</label>
+            <select id="style">
+                <option value="all">All</option>
+                <option value="casual">Casual</option>
+                <option value="sports">Sports</option>
+                <option value="formal">Formal</option>
+            </select>
+            <label for="size-filter">Size:</label>
+            <select id="size-filter">
+                <option value="all">All</option>
+            </select>
+            <button onclick="filterShoes()">Apply Filters</button>
+        </div>
+        <div id="shoe-list" class="shoe-list"></div>
+        <div id="balance" style="display: none;">Balance: $<span id="balance-amount">100</span></div>
+        <div id="cart" style="display: none;">
+            <h2>Shopping Cart</h2>
+            <ul id="cart-items"></ul>
+            <button id="checkoutBtn" onclick="checkout()" disabled>Proceed to Checkout</button>
+        </div>
+    </main>
 </div>
-<input type="text" id="nameinput" placeholder="Name">
-<input type="text" id="sizeinput" placeholder="Size">
-<input type="text" id="brandinput" placeholder="Brand">
-<input type="text" id="genderinput" placeholder="Gender">
-<input type="text" id="styleinput" placeholder="Style">
-<input type="text" id="photoinput" placeholder="Photo URL">
-<button onclick="submitForm()">Submit</button>
-
+<aside class="aside">
+    <div class="quote">
+        "You can tell a lot about a person by the shoes they wear."
+    </div>
+</aside>
+<footer class="footer">
+    <a href="#">Instagram</a>
+    <span>|</span>
+    <span>&copy; 2024 Shoe Shop</span>
+</footer>
 <script src="../static/scripts/index.js"></script>
+
+<!-- Call fetchShoes function to initially load shoes data -->
 <script>
-    let isLoggedIn = false;
-    function toggleLoginStatus() {
-        const loginStatusDiv = document.getElementById('login-status');
-        if (isLoggedIn) {
-            loginStatusDiv.innerHTML = '<button class="login-button" onclick="logout()">Logout</button>';
-        } else {
-            loginStatusDiv.innerHTML = '<button class="login-button" onclick="login()">Login</button>';
-        }
-    }
-    function login() {
-        isLoggedIn = true;
-        toggleLoginStatus();
-    }
-    function logout() {
-        isLoggedIn = false;
-        toggleLoginStatus();
-    }
-    function checkout() {
-        if (!isLoggedIn) {
-            alert('Please login to proceed with checkout.');
-            return;
-        }
-        if (cart.length === 0) {
-            alert('Your cart is empty!');
-            return;
-        }
-        let totalPrice = 0;
-        cart.forEach(item => {
-            totalPrice += item.price;
-        });
-        if (totalPrice > balance) {
-            alert('Insufficient funds!');
-            return;
-        }
-        balance -= totalPrice;
-        cart.length = 0;
-        updateCart();
-        document.getElementById('balance-amount').textContent = balance;
-        alert('Checkout successful!');
-    }
-    function submitForm() {
-        const name = document.getElementById('nameinput').value;
-        const size = document.getElementById('sizeinput').value;
-        const brand = document.getElementById('brandinput').value;
-        const gender = document.getElementById('genderinput').value;
-        const style = document.getElementById('styleinput').value;
-        const photo = document.getElementById('photoinput').value;
-
-
-        console.log('Form submitted:', { name, size, brand, gender, style, photo });
-    }
-    toggleLoginStatus();
+    fetchShoes();
 </script>
 </body>
 </html>

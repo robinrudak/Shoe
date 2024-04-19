@@ -1,332 +1,351 @@
-const shoes = [
-  {
-    id: 1,
-    gender: 'male',
-    brand: 'Nike',
-    style: 'sports',
-    name: 'Nike Air Max',
-    price: 80,
-    inventory: [
-      { size: 8, quantity: 2 },
-      { size: 9, quantity: 2 },
-      { size: 10, quantity: 2 }
-    ]
-  },
-  {
-    id: 2,
-    gender: 'female',
-    brand: 'Adidas',
-    style: 'casual',
-    name: 'Adidas Superstar',
-    price: 70,
-    inventory: [
-      { size: 6, quantity: 2 },
-      { size: 7, quantity: 2 },
-      { size: 8, quantity: 2 }
-    ]
-  },
-  {
-    id: 3,
-    gender: 'male',
-    brand: 'Puma',
-    style: 'formal',
-    name: 'Puma Classic',
-    price: 60,
-    inventory: [
-      { size: 7, quantity: 2 },
-      { size: 8, quantity: 2 },
-      { size: 9, quantity: 2 }
-    ]
-  },
-  {
-    id: 4,
-    gender: 'female',
-    brand: 'Nike',
-    style: 'sports',
-    name: 'Nike Flex',
-    price: 90,
-    inventory: [
-      { size: 7, quantity: 2 },
-      { size: 8, quantity: 2 },
-      { size: 9, quantity: 2 }
-    ]
-  },
-  {
-    id: 5,
-    gender: 'male',
-    brand: 'Adidas',
-    style: 'casual',
-    name: 'Adidas Gazelle',
-    price: 85,
-    inventory: [
-      { size: 8, quantity: 2 },
-      { size: 9, quantity: 2 },
-      { size: 10, quantity: 2 }
-    ]
-  },
-  {
-    id: 6,
-    gender: 'female',
-    brand: 'Puma',
-    style: 'sports',
-    name: 'Puma Ignite',
-    price: 75,
-    inventory: [
-      { size: 6, quantity: 2 },
-      { size: 7, quantity: 2 },
-      { size: 8, quantity: 2 }
-    ]
-  },
-  {
-    id: 7,
-    gender: 'male',
-    brand: 'Nike',
-    style: 'formal',
-    name: 'Nike Tanjun',
-    price: 70,
-    inventory: [
-      { size: 7, quantity: 2 },
-      { size: 8, quantity: 2 },
-      { size: 9, quantity: 2 }
-    ]
-  },
-  {
-    id: 8,
-    gender: 'female',
-    brand: 'Adidas',
-    style: 'sports',
-    name: 'Adidas Ultraboost',
-    price: 100,
-    inventory: [
-      { size: 6, quantity: 2 },
-      { size: 7, quantity: 2 },
-      { size: 8, quantity: 2 }
-    ]
-  },
-  {
-    id: 9,
-    gender: 'male',
-    brand: 'Puma',
-    style: 'casual',
-    name: 'Puma Suede',
-    price: 80,
-    inventory: [
-      { size: 8, quantity: 2 },
-      { size: 9, quantity: 2 },
-      { size: 10, quantity: 2 }
-    ]
-  },
-  {
-    id: 10,
-    gender: 'female',
-    brand: 'Nike',
-    style: 'formal',
-    name: 'Nike Revolution',
-    price: 65,
-    inventory: [
-      { size: 7, quantity: 2 },
-      { size: 8, quantity: 2 },
-      { size: 9, quantity: 2 }
-    ]
-  },
-];
+function signUpUser() {
+    // Get form inputs
+    const name = document.getElementById('name').value;
+    let password = document.getElementById('password').value;
+    let balance = 0;
+    // Create user object
+    let user = {
+        name: name,
+        balance: balance,
+        password: password
 
-let balance = 200;
-const cart = [];
 
-let getRequest = new XMLHttpRequest();
-getRequest.open("GET", "http://localhost:8080/Shoes/all");
-getRequest.responseType = "json";
-getRequest.onload = function() {
-  if (getRequest.status == 200){
-    shoes = getRequest.response;
-  } else {
-    console.log("Oh, no!");
-  }
-};
-getRequest.send();
-function submitForm() {
-  const name = document.getElementById('nameinput').value;
-  const size = document.getElementById('sizeinput').value;
-  const brand = document.getElementById('brandinput').value;
-  const gender = document.getElementById('genderinput').value;
-  const style = document.getElementById('styleinput').value;
-  const photo = document.getElementById('photoinput').value;
-
-  const formData = new URLSearchParams();
-  formData.append('name', name);
-  formData.append('size', size);
-  formData.append('brand', brand);
-  formData.append('gender', gender);
-  formData.append('style', style);
-  formData.append('photo', photo);
-
-  const posturl = "http://localhost:8080/shoe?" + formData.toString();
-
-  let postRequest = new XMLHttpRequest();
-  postRequest.open("POST", posturl);
-  postRequest.setRequestHeader("Content-Type", "application/json");
-  postRequest.onload = function() {
-    if (postRequest.status == 201) {
-      console.log("POST request successful!");
-    } else {
-      console.log("Error:", postRequest.status);
-    }
-  };
-  postRequest.send();
+    };
+    let url = 'http://localhost:8080/user/user?';
+    url += 'name=' + name + '&balance=' + balance + '&password=' + password;
+    // Send POST request to API
+    fetch(url, {
+        method: 'POST'
+    })
+    .then(response => {
+        if (response.ok) {
+            // If user created successfully, show success message
+            alert('User created successfully!');
+            window.location.href = 'index.html';
+        } else {
+            // If there's an error, show error message
+            alert('Failed to create user. Please try again.');
+        }
+    })
+    .catch(error => {
+        // If there's a network error, show error message
+        console.error('Error:', error);
+        alert('Failed to create user. Please check your internet connection and try again.');
+    });
 }
 
-let putData = { /* Put your PUT request data here */ };
+function login() {
+    var loggedInUser = document.getElementById("loggedInUser");
+    var loginBtn = document.getElementById("loginBtn");
+    if (loginBtn.textContent === "Log Out") {
+        // If the button text is "Log Out", perform logout action
+        logout()
+    } else {
+        // Get the username entered by the user
+        var name = prompt("Enter your username:");
+        var password = prompt("Enter your password:");
+        let url = 'http://localhost:8080/user/user?';
+        url += 'name=' + name;
+        // Make an API call to fetch the user by name
+        fetch(url, {
+            method: 'GET'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(user => {
+            if (user !== null && user.userPassword === password) {
+                // User found and password matches, perform login action
+                loggedInUser.textContent = "Logged in as: " + name;
+                loginBtn.textContent = "Log Out";
+                // Perform additional actions such as redirecting to a new page or setting user session
+                sessionStorage.setItem("userName", user.userName);
+                sessionStorage.setItem("userId", user.userId);
+            } else {
+                // User not found or password doesn't match, display error message
+                alert('Invalid username or password.');
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            // Handle errors such as network issues or server errors
+        });
+    }
+}
+function logout() {
+    loggedInUser.textContent = "";
+    loginBtn.textContent = "Login";
+    // Clear session storage or perform any additional logout actions
+    sessionStorage.clear();
+}
 
 
-putButton.addEventListener("click", function(event) {
-    let id = idToUpdate.value;
+let shoes = [];
 
-    let request = new XMLHttpRequest();
-    request.open("PUT", "http://localhost:8080/shoe" + id);
-    request.setRequestHeader("Content-Type", "application/json");
-    request.responseType = "json";
-    request.onload = function() {
-        if (request.status == 200) {
-            console.log("PUT request successful!");
-        } else {
-            console.log("Error:", request.status);
-        }
-    };
-    request.send();
-});
+// Function to fetch shoes data from the backend
+function fetchShoes() {
+    fetch("http://localhost:8080/shoe/allshoes", {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+        shoes = data;
+        displayShoes(shoes);
+    })
+    .catch(error => console.error('Error fetching shoes:', error));
+}
 
-let deleteRequest = new XMLHttpRequest();
-deleteRequest.open("DELETE", "http://localhost:8080/shoe");
-deleteRequest.responseType = "json";
-deleteRequest.onload = function() {
-  if (deleteRequest.status == 204) {
-    console.log("DELETE request successful!");
-  } else {
-    console.log("Oh, no!");
-  }
-};
-deleteRequest.send();
+function createShoe(shoeData) {
+    fetch("http://localhost:8080/shoe", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(shoeData),
+    })
+        .then(response => {
+            if (response.status === 201) {
+                console.log("Shoe created successfully!");
+                fetchShoes(); // Refresh shoe list after creation
+            } else {
+                console.error("Failed to create shoe:", response.status);
+            }
+        })
+        .catch(error => console.error('Error creating shoe:', error));
+}
+
+function updateShoe(id, shoeData) {
+    fetch(`http://localhost:8080/shoe/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(shoeData),
+    })
+        .then(response => {
+            if (response.status === 200) {
+                console.log("Shoe updated successfully!");
+                fetchShoes(); // Refresh shoe list after update
+            } else {
+                console.error("Failed to update shoe:", response.status);
+            }
+        })
+        .catch(error => console.error('Error updating shoe:', error));
+}
+
+function deleteShoe(id) {
+    let url = 'http://localhost:8080/shoe/shoe?id=';
+    url += id
+    fetch(url, {
+        method: 'DELETE',
+    })
+        .then(response => {
+            if (response.status === 200) {
+                console.log("Shoe deleted successfully!");
+                fetchShoes(); // Refresh shoe list after deletion
+            } else {
+                console.error("Failed to delete shoe:", response.status);
+            }
+        })
+        .catch(error => console.error('Error deleting shoe:', error));
+}
 
 function filterShoes() {
-  const gender = document.getElementById('gender').value;
-  const brand = document.getElementById('brand').value;
-  const style = document.getElementById('style').value;
-  const size = document.getElementById('size-filter').value;
+    // Get the filter criteria
+    var gender = document.getElementById("gender").value;
+    var brand = document.getElementById("brand").value;
+    var style = document.getElementById("style").value;
+    var sizeFilter = document.getElementById("size-filter").value;
 
-  let filteredShoes = shoes.filter(shoe =>
-    (gender === 'all' || shoe.gender === gender) &&
-    (style === 'all' || shoe.style === style) &&
-    (size === 'all' || shoe.inventory.some(item => item.size === parseInt(size)))
-  );
+    // Apply the filters to the shoes array based on the criteria
+    var filteredShoes = shoes.filter(shoe => {
+        if (gender !== "all" && shoe.shoeGender !== gender) return false;
+        if (brand !== "all" && shoe.shoeBrand !== brand) return false;
+        if (style !== "all" && shoe.shoeStyle !== style) return false;
+        if (sizeFilter !== "all" && shoe.shoeSize !== parseInt(sizeFilter)) return false;
+        return true;
+    });
 
-  if (brand !== 'all') {
-    filteredShoes = filteredShoes.filter(shoe => shoe.brand === brand);
-  }
-
-  displayShoes(filteredShoes);
+    // Display the filtered shoes
+    displayShoes(filteredShoes);
 }
+
+// Function to populate the size filter dropdown based on available sizes
+function populateSizeFilter() {
+    var sizes = shoes.map(shoe => shoe.size);
+    var uniqueSizes = Array.from(new Set(sizes));
+    var sizeFilterSelect = document.getElementById("size-filter");
+    sizeFilterSelect.innerHTML = "<option value='all'>All</option>"; // Reset size filter
+    uniqueSizes.forEach(size => {
+        var option = document.createElement("option");
+        option.value = size;
+        option.textContent = size;
+        sizeFilterSelect.appendChild(option);
+    });
+}
+
+// Call populateSizeFilter function to initially populate the size filter dropdown
+populateSizeFilter();
 
 function displayShoes(shoes) {
-  const shoeList = document.getElementById('shoe-list');
-  shoeList.innerHTML = '';
-
-  shoes.forEach(shoe => {
-    const shoeItem = document.createElement('div');
-    shoeItem.classList.add('shoe-item');
-    let stockStatus = 'Size: ';
-    if (shoe.inventory.every(item => item.quantity === 0)) {
-      stockStatus = 'Out of Stock';
-    }
-    shoeItem.textContent = `${shoe.brand} - ${shoe.name} | Sizes: ${shoe.inventory.map(item => item.size).join(', ').replace(/,/g, ', ')} | Price: $${shoe.price} | ${stockStatus}`;
-    const sizeDropdown = document.createElement('select');
-    shoe.inventory.forEach(item => {
-      const option = document.createElement('option');
-      option.value = item.size;
-      option.textContent = item.size;
-      sizeDropdown.appendChild(option);
+    // Implement display logic here
+    var shoeList = document.getElementById("shoe-list");
+    // Clear previous shoe list
+    shoeList.innerHTML = "";
+    // Iterate over the shoes and display each shoe
+    shoes.forEach(shoe => {
+        var shoeItem = document.createElement("div");
+        shoeItem.textContent = `${shoe.shoeBrand} - ${shoe.shoeName} - Size: ${shoe.shoeSize}`;
+        shoeList.appendChild(shoeItem);
     });
-    shoeItem.appendChild(sizeDropdown);
-    const addButton = document.createElement('button');
-    addButton.textContent = 'Add to Cart';
-    addButton.addEventListener('click', () => addToCart(shoe, sizeDropdown.value));
-    shoeItem.appendChild(addButton);
-    shoeList.appendChild(shoeItem);
-  });
 }
 
-function addToCart(shoe, selectedSize) {
-  const selectedInventory = shoe.inventory.find(item => item.size === parseInt(selectedSize));
-  if (selectedInventory && selectedInventory.quantity > 0) {
-    selectedInventory.quantity--;
-    const selectedShoe = { ...shoe, selectedSize: parseInt(selectedSize) };
-    cart.push(selectedShoe);
-    updateCart();
-  } else {
-    alert('This size is not available for this shoe or it is out of stock.');
-  }
+function addToCart(shoe) {
+    // Check if the shoe is already in the cart
+    var cartItems = document.getElementById("cart-items");
+    var shoeAlreadyInCart = Array.from(cartItems.children).some(item => item.dataset.shoeId === shoe.id.toString());
+
+    if (shoeAlreadyInCart) {
+        alert("This shoe is already in your cart.");
+        return;
+    }
+
+    // Create a new list item for the shoe
+    var listItem = document.createElement("li");
+    listItem.textContent = `${shoe.brand} - ${shoe.name} - Size: ${shoe.size}`;
+    listItem.dataset.shoeId = shoe.id; // Set custom data attribute to store shoe ID
+    cartItems.appendChild(listItem);
+
+    // Enable checkout button
+    var checkoutBtn = document.getElementById("checkoutBtn");
+    if (checkoutBtn) {
+        checkoutBtn.disabled = false;
+    }
 }
 
-function updateCart() {
-  const cartItems = document.getElementById('cart-items');
-  cartItems.innerHTML = '';
 
-  cart.forEach((item, index) => {
-    const li = document.createElement('li');
-    li.textContent = `${item.brand} - ${item.name} | Size: ${item.selectedSize} | Price: $${item.price}`;
-    const removeButton = document.createElement('button');
-    removeButton.textContent = 'Remove';
-    removeButton.addEventListener('click', () => removeFromCart(index));
-    li.appendChild(removeButton);
-    cartItems.appendChild(li);
-  });
+function removeFromCart(shoe) {
+    var cartItems = document.getElementById("cart-items");
+    var itemsToRemove = Array.from(cartItems.children).filter(item => item.dataset.shoeId === shoe.id.toString());
 
-  const cartSection = document.getElementById('cart');
-  cartSection.style.display = 'block';
+    if (itemsToRemove.length === 0) {
+        alert("This shoe is not in your cart.");
+        return;
+    }
+
+    // Remove the shoe from the cart
+    itemsToRemove.forEach(item => cartItems.removeChild(item));
+
+    // If the cart is empty, disable the checkout button
+    if (cartItems.children.length === 0) {
+        var checkoutBtn = document.getElementById("checkoutBtn");
+        if (checkoutBtn) {
+            checkoutBtn.disabled = true;
+        }
+    }
 }
 
-function removeFromCart(index) {
-  const removedShoe = cart[index];
-  const removedInventory = removedShoe.inventory.find(item => item.size === removedShoe.selectedSize);
-  removedInventory.quantity++;
-  cart.splice(index, 1);
-  updateCart();
-}
 
 function checkout() {
-  if (cart.length === 0) {
-    alert('Your cart is empty!');
-    return;
-  }
+    // Get the cart items
+    var cartItems = document.getElementById("cart-items").children;
 
-  let totalPrice = 0;
-  cart.forEach(item => {
-    totalPrice += item.price;
-  });
+    // Check if the cart is empty
+    if (cartItems.length === 0) {
+        alert("Your cart is empty. Please add items before checking out.");
+        return;
+    }
 
-  if (totalPrice > balance) {
-    alert('Insufficient funds!');
-    return;
-  }
+    // Perform checkout logic, such as processing payment, updating inventory, etc.
+    // For simplicity, let's just display an alert message indicating successful checkout.
+    alert("Thank you for your purchase! Your order has been successfully placed.");
 
-  balance -= totalPrice;
-  cart.length = 0;
-  updateCart();
-  document.getElementById('balance-amount').textContent = balance;
-  alert('Checkout successful!');
+    // Clear the cart
+    var cart = document.getElementById("cart");
+    if (cart) {
+        cart.style.display = "none";
+    }
+    var cartItemsList = document.getElementById("cart-items");
+    if (cartItemsList) {
+        while (cartItemsList.firstChild) {
+            cartItemsList.removeChild(cartItemsList.firstChild);
+        }
+    }
+
+    // Disable the checkout button
+    var checkoutBtn = document.getElementById("checkoutBtn");
+    if (checkoutBtn) {
+        checkoutBtn.disabled = true;
+    }
 }
 
-function populateSizeDropdown() {
-  const sizeDropdown = document.getElementById('size-filter');
-  const allSizes = shoes.flatMap(shoe => shoe.inventory.map(item => item.size));
-  const uniqueSizes = [...new Set(allSizes)];
+// Call fetchShoes function to initially load shoes data
+fetchShoes();
 
-  uniqueSizes.forEach(size => {
-    const option = document.createElement('option');
-    option.value = size;
-    option.textContent = size;
-    sizeDropdown.appendChild(option);
-  });
+function deleteUser() {
+    let url = 'http://localhost:8080/user/user?id=';
+    let userId = sessionStorage.getItem('userId');
+
+    if (!userId) {
+        console.error("No user id found in session storage");
+        return;
+    }
+
+    url += userId;
+
+    fetch(url, {
+        method: 'DELETE',
+    })
+        .then(response => {
+            if (response.status === 200) {
+                alert("User deleted successfully!");
+                sessionStorage.removeItem('userId');
+                sessionStorage.removeItem('userName');
+                logout();
+            } else {
+                console.error("Failed to delete user:", response.status);
+            }
+        })
+        .catch(error => console.error('Error deleting user:', error));
 }
-populateSizeDropdown();
-displayShoes(shoes);
+function changePassword() {
+    let userId = sessionStorage.getItem('userId');
+    let userName = sessionStorage.getItem('userName')
+    if (!userId) {
+        alert("No user signed in.");
+        console.error("No user id found in session storage");
+        return;
+    } else {
+        let url = 'http://localhost:8080/user/user?name=';
+        url += userName;
+        fetch(url, {
+            method: 'GET'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+        return response.json();
+        })
+        .then(user => {
+            var password = prompt("Enter new password:");
+            let url = 'http://localhost:8080/user/user?id=';
+            url += user.userId + "&name=" + userName + "&balance=" + user.userBalance;
+            url += "&password=" + password;
+            fetch(url, {
+                method: 'PUT'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                    alert("Something went wrong!")
+                } else {
+                    alert("Password has been changed!")
+                }
+            });
+        });
+    }
+}

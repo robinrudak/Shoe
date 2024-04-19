@@ -36,6 +36,10 @@ public class User {
 
 
     public <E> User(int id, String name, int balance, String password, ArrayList<E> es) {
+        this.userId = id;
+        this.userName = name;
+        this.userBalance = balance;
+        this.userPassword = password;
     }
 }
 

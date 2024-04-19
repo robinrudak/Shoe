@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class UserController {
     private UserService userService;
 
-    // Lagt till konstruktor för annars är userService null.
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -27,10 +26,15 @@ public class UserController {
     }
 
     @GetMapping("user")
-    public ResponseEntity<User> getUserById(int id){
-        User user = userService.getUser(id);
-        if (user != null) {
-            return ResponseEntity.status(200).body(user);
+    public ResponseEntity<User> getUserByName(String name){
+        ArrayList<User> userArrayList = getAllUsers();
+        for(User user : userArrayList) {
+            if(user.getUserName().equals(name)) {
+                User userFound = userService.getUser(user.getUserId());
+                if (userFound != null) {
+                    return ResponseEntity.status(200).body(userFound);
+                }
+            }
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }

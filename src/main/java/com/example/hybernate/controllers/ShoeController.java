@@ -16,13 +16,11 @@ public class ShoeController {
         this.shoeService = shoeService;
     }
 
-    // TODO Hemsida behöver.
     @GetMapping("allshoes")
     public ArrayList<Shoe> getAllShoes() {
     return shoeService.getAll();
     }
 
-    // TODO Hemsida behöver.
     @GetMapping("shoe")
     public ResponseEntity<Shoe> getShoeById(int id){
         Shoe shoe = shoeService.getShoe(id);

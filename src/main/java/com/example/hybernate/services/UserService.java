@@ -28,7 +28,6 @@ public class UserService {
         }
         return null;
     }
-
     public boolean deleteUser(int id) {
         if (repo.existsById(id)) {
             repo.deleteById(id);

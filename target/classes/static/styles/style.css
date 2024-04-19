@@ -1,10 +1,19 @@
+/* Default styles */
 
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   display: flex;
-  justify-content: center;
-  align-items: center; 
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px; /* Adjust the bottom margin as needed */
 }
 
 .container {
@@ -19,6 +28,39 @@ body {
 
 h1 {
   color: #333;
+}
+
+.payment-options {
+  margin-bottom: 20px;
+}
+
+.payment-options input[type="radio"] {
+  display: none;
+}
+
+.payment-options label {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.payment-options input[type="radio"]:checked + label {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.payment-buttons {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #464746;
+  color: white;
+  cursor: pointer;
+}
+
+.payment-buttons:hover {
+  background-color: #333;
 }
 
 .filters {
@@ -57,6 +99,7 @@ h1 {
   width: 100px;
   flex: 1;
 }
+
 .shoe-item select {
   margin-top: 10px;
   padding: 10px;
@@ -68,6 +111,7 @@ h1 {
   width: 100px;
   flex: 1;
 }
+
 .cart-item {
   margin-bottom: 5px;
   padding: 10px;
@@ -85,7 +129,8 @@ h1 {
   cursor: pointer;
 }
 
-#balance, #cart {
+#balance,
+#cart {
   margin-top: 20px;
   text-align: left;
 }
@@ -94,22 +139,148 @@ h1 {
   margin-top: 10px;
 }
 
-    .login-status {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-    .login-button {
-        font-size: 16px;
-        padding: 10px 20px;
-    }
+.login-status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 
-    .login-status {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+.login-button {
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.landing-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.landing-buttons {
+  font-size: 18px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #464746;
+  color: white;
+  cursor: pointer;
+}
+
+.landing-buttons:hover {
+  background-color: #333; /* darken the background color on hover */
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container form div {
+  margin-bottom: 15px;
+}
+
+.container form label {
+  margin-bottom: 5px;
+}
+
+.container form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Make input fields take full width */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+.container form button {
+  margin-top: 10px;
+}
+
+#signup-page input[type="text"],
+#signup-page input[type="password"] {
+  width: 100%;
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f9f9f9; /* Change to desired background color */
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  padding: 10px 0; /* Add padding to make it look better */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.footer a {
+  margin-right: 10px;
+  color: #888;
+  text-decoration: none; /* Remove underline from links */
+}
+
+.footer a:hover {
+  color: #333;
+}
+
+aside {
+  position: fixed;
+  top: 100;
+  right: 0;
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 150px;
+}
+
+.quote {
+  font-family: Calibri, sans-serif;
+  font-style: italic;
+}
+
+/* Media queries */
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 10px;
+    max-width: 100%;
   }
-  .login-button {
-      font-size: 16px;
-      padding: 10px 20px;
+  aside {
+    display: none;
   }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .container {
+    padding: 20px;
+  }
+  aside {
+    width: 100px; /* Adjust width as needed */
+    padding: 20px; /* Adjust padding as needed */
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .container {
+    padding: 30px;
+  }
+  aside {
+    width: 200px; /* Adjust width as needed */
+    padding: 150px; /* Adjust padding as needed */
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .container {
+    padding: 20px;
+  }
+  aside {
+    width: 80px; /* Decrease width to give more space to the main content */
+    padding: 20px 40px; /* Increase padding around the aside element */
+  }
+}
